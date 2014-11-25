@@ -1,0 +1,29 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>ui-preview</title>
+    <script src="http://localhost:35729/livereload.js"></script>
+    <link rel="import" href="node_modules/polymer/polymer.html">
+    <link rel="import" href="src/ui-preview.html">
+    <style>
+      body {
+        font-family: "Helvetica Neue", "Helvetica", Arial;
+      }
+      ui-preview {
+        width: 30em;
+      }
+    </style>
+  </head>
+  <body unresolved>
+    <ui-preview>
+      <preview>How much wood could a woodchuck chuck</preview>
+      <full>How much wood could a woodchuck chuck if a woodchuck could chuck wood?</full>
+    </ui-preview>
+    <script>
+      document.addEventListener('polymer-ready', function() {
+        //poke your element here
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+<polymer-element name="ui-preview" attributes="expanded">
+<template>
+  <link rel="stylesheet" type="text/css" href="./ui-preview.less">
+  <section id="preview">
+    <display><content select="preview"></content></display><expander on-click="{{expand}}"></expander>
+  </section>
+  <section id="full">
+    <display><content select="full"></content></display><collapser on-click="{{collapse}}"></collapser>
+  </section>
+</template>
+<script src="./ui-preview.litcoffee"></script>
+</polymer-element>

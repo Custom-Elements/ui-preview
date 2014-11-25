@@ -1,0 +1,39 @@
+@import "../node_modules/ui-styles/variables";
+@import "../node_modules/ui-styles/visual-elements";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  #preview, #full {
+    display: flex;
+    display {
+      flex: 1;
+    }
+  }
+  #full {
+    display: none;
+  }
+  expander, collapser {
+    display: flex;
+    display: inline;
+    cursor: pointer;
+    align-self: flex-end;
+    &:before {
+      content:  "...";
+      .cannot-select-text
+    }
+    &:hover {
+    }
+    .transition(@transition);
+    .hover;
+  }
+}
+
+:host([expanded]) {
+  #preview {
+    display: none;
+  }
+  #full {
+    display: flex;
+  }
+}

@@ -2,7 +2,7 @@
 Look across a set of things, and make sure at most one, the most recent
 expanded item stays expanded.
 
-
+    require 'ui-styles/animations'
     Polymer 'ui-only-one-expanded',
 
 ##Events
@@ -14,12 +14,17 @@ expanded item stays expanded.
 
 ##Event Handlers
 
-      enforce: (evt) ->
-        console.log evt
+      enforce: (evt, recentlyExpandedElement) ->
         expandedElements = @querySelectorAll 'ui-only-one-expanded /deep/ [expanded]'
         expandedElements.array().forEach (expandedElement) ->
-          if expandedElement isnt evt.target
+          if expandedElement isnt recentlyExpandedElement
             expandedElement?.collapse()
+
+      hideThenShow: (evt, callback) ->
+        expandedElement = @querySelector 'ui-only-one-expanded /deep/ [expanded]'
+        if expandedElement and expandedElement?.collapse
+          callback.defer = true
+          expandedElement.collapse callback
 
 ##Polymer Lifecycle
 

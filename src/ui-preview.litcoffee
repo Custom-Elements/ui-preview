@@ -1,12 +1,14 @@
 #ui-preview
 A transition view that lets you see a preview and then click to see more.
 
-
+    require 'ui-styles/animations'
     Polymer 'ui-preview',
 
 ##Events
 ###expanded
 Fires when an item switches to the expanded view.
+###expanding
+Fires when an item is about to be expanded, but is not yet.
 
 ##Attributes and Change Handlers
 
@@ -15,36 +17,38 @@ Fires when an item switches to the expanded view.
           @fire 'expanded', @
 
 ##Methods
+###collapse
+This is not an event handler, it is just a method.
+
+      collapse: (callback) ->
+        if not @hasAttribute 'expanded'
+          callback?()
+        preview = @$.preview
+        full = @$.full
+        full.fadeOut =>
+          @removeAttribute 'expanded'
+          preview.fadeIn callback
 
 ##Event Handlers
+###expand
+This will switch to a full expanded visual, but with a twist
+that it fires an event before the expansion, with a callback
+that will finish the animation. No handler for `expanding`? No problem
+the animation will just run.
 
-      expand: ->
+      expand: () ->
+        if @hasAttribute 'expanded'
+          return
         preview = @$.preview
         full = @$.full
-        anim = preview.animate [
-          {opacity: 1, transform: 'translateY(0)', offset: 0}
-          {opacity: 0, transform: 'translateY(10%)', offset: 1}
-          ], duration: 200, easing: "0.2s cubic-bezier(0.4, 0.0, 1, 1)"
-        anim.onfinish = =>
-          @setAttribute 'expanded', ''
-          anim = full.animate [
-            {opacity: 0, transform: 'translateY(10%)', offset: 0}
-            {opacity: 1, transform: 'translateY(0%)', offset: 1}
-            ], duration: 200, easing: "0.2s cubic-bezier(0.4, 0.0, 1, 1)"
+        finishExpand = =>
+          preview.fadeOut =>
+            @setAttribute 'expanded', ''
+            full.fadeIn()
+        @fire 'expanding', finishExpand
+        if not finishExpand.defer
+          finishExpand()
 
-      collapse: ->
-        preview = @$.preview
-        full = @$.full
-        anim = full.animate [
-          {opacity: 1, transform: 'translateY(0)', offset: 0}
-          {opacity: 0, transform: 'translateY(10%)', offset: 1}
-          ], duration: 200, easing: "0.2s cubic-bezier(0.4, 0.0, 1, 1)"
-        anim.onfinish = =>
-          @removeAttribute 'expanded'
-          anim = preview.animate [
-            {opacity: 0, transform: 'translateY(10%)', offset: 0}
-            {opacity: 1, transform: 'translateY(0%)', offset: 1}
-            ], duration: 200, easing: "0.2s cubic-bezier(0.4, 0.0, 1, 1)"
 
 ##Polymer Lifecycle
 

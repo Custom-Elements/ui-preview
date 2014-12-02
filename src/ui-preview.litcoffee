@@ -1,15 +1,18 @@
 #ui-preview
-A transition view that lets you see a preview and then click ... to see more.
+A transition view that lets you see a preview and then click to see more.
 
 
     Polymer 'ui-preview',
 
 ##Events
+###expanded
+Fires when an item switches to the expanded view.
 
 ##Attributes and Change Handlers
 
       expandedChanged: ->
-        console.log 'yo', @hasAttribute 'expanded'
+        if @hasAttribute 'expanded'
+          @fire 'expanded', @
 
 ##Methods
 

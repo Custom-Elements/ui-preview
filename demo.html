@@ -6,6 +6,7 @@
     <script src="http://localhost:35729/livereload.js"></script>
     <link rel="import" href="node_modules/polymer/polymer.html">
     <link rel="import" href="src/ui-preview.html">
+    <link rel="import" href="src/ui-only-one-expanded.html">
     <style>
       body {
         font-family: "Helvetica Neue", "Helvetica", Arial;
@@ -16,10 +17,16 @@
     </style>
   </head>
   <body unresolved>
-    <ui-preview>
-      <preview>How much wood could a woodchuck chuck</preview>
-      <full>How much wood could a woodchuck chuck if a woodchuck could chuck wood?</full>
-    </ui-preview>
+    <ui-only-one-expanded>
+      <ui-preview>
+        <preview>How much wood could a woodchuck chuck</preview>
+        <full>How much wood could a woodchuck chuck if a woodchuck could chuck wood?</full>
+      </ui-preview>
+      <ui-preview>
+        <preview>Polymerize</preview>
+        <full>Polymerize all the things!</full>
+      </ui-preview>
+    </ui-only-one-expanded>
     <script>
       document.addEventListener('polymer-ready', function() {
         //poke your element here

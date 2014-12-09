@@ -29,26 +29,30 @@ This is not an event handler, it is just a method.
           @removeAttribute 'expanded'
           preview.fadeIn callback
 
-##Event Handlers
 ###expand
 This will switch to a full expanded visual, but with a twist
 that it fires an event before the expansion, with a callback
 that will finish the animation. No handler for `expanding`? No problem
 the animation will just run.
 
-      expand: () ->
+      expand: (callback) ->
         if @hasAttribute 'expanded'
+          callback?()
           return
         preview = @$.preview
         full = @$.full
         finishExpand = =>
           preview.fadeOut =>
             @setAttribute 'expanded', ''
-            full.fadeIn()
+            full.fadeIn callback
         @fire 'expanding', finishExpand
         if not finishExpand.defer
           finishExpand()
 
+##Event Handlers
+
+      onExpand: ->
+        @expand()
 
 ##Polymer Lifecycle
 

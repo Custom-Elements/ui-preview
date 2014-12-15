@@ -1,7 +1,7 @@
 <polymer-element name="ui-only-one-expanded">
   <template>
     <link rel="stylesheet" type="text/css" href="./ui-only-one-expanded.less">
-    <section on-expanded="{{enforce}}" on-expanding="{{hideThenShow}}">
+    <section on-expanded="{{enforce}}" on-expanding="{{hideThenShow}}" on-click="{{trap}}">
       <content></content>
     </section>
   </template>

@@ -11,6 +11,13 @@ expanded item stays expanded.
 
 
 ##Methods
+###collapse
+Collapse all the collapseable things.
+
+      collapse: ->
+        expandedElements = @querySelectorAll 'ui-only-one-expanded /deep/ [expanded]'
+        expandedElements.array().forEach (expandedElement) ->
+          expandedElement?.collapse()
 
 ##Event Handlers
 
@@ -26,13 +33,23 @@ expanded item stays expanded.
           callback.defer = true
           expandedElement.collapse callback
 
+      trap: (evt) ->
+        evt.preventDefault()
+        evt.stopPropagation()
+
 ##Polymer Lifecycle
 
       created: ->
 
       ready: ->
 
+###attached
+On attach, set up a global click handler, this will make clicking 'out' of the
+preview collapse all the things, working together with the `trap` handler which
+makes it so you can actually click things to expand them.
+
       attached: ->
+        document.addEventListener 'click', => @collapse()
 
       domReady: ->
 

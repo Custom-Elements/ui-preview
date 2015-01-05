@@ -34,7 +34,6 @@ Collapse all the collapseable things.
           expandedElement.collapse callback
 
       trap: (evt) ->
-        evt.preventDefault()
         evt.stopPropagation()
 
 ##Polymer Lifecycle

@@ -23,17 +23,17 @@ This is not an event handler, it is just a method.
       collapse: (callback) ->
         if not @hasAttribute 'expanded'
           callback?()
+          return
         preview = @$.preview
         full = @$.full
-        full.fadeOut =>
-          @removeAttribute 'expanded'
-          preview.fadeIn callback
+        preview.removeAttribute 'hidden'
+        full.setAttribute 'hidden', ''
+        @removeAttribute 'expanded'
+        callback?()
 
 ###expand
 This will switch to a full expanded visual, but with a twist
-that it fires an event before the expansion, with a callback
-that will finish the animation. No handler for `expanding`? No problem
-the animation will just run.
+that it fires an event before the expansion, with a callback.
 
       expand: (callback) ->
         if @hasAttribute 'expanded'
@@ -41,13 +41,10 @@ the animation will just run.
           return
         preview = @$.preview
         full = @$.full
-        finishExpand = =>
-          preview.fadeOut =>
-            @setAttribute 'expanded', ''
-            full.fadeIn callback
-        @fire 'expanding', finishExpand
-        if not finishExpand.defer
-          finishExpand()
+        preview.setAttribute 'hidden', ''
+        full.removeAttribute 'hidden'
+        @setAttribute 'expanded', ''
+        callback?()
 
 ##Event Handlers
 

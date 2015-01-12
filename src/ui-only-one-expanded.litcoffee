@@ -27,12 +27,6 @@ Collapse all the collapseable things.
           if expandedElement isnt recentlyExpandedElement
             expandedElement?.collapse()
 
-      hideThenShow: (evt, callback) ->
-        expandedElement = @querySelector 'ui-only-one-expanded /deep/ [expanded]'
-        if expandedElement and expandedElement?.collapse
-          callback.defer = true
-          expandedElement.collapse callback
-
       trap: (evt) ->
         evt.stopPropagation()
 

@@ -37,12 +37,8 @@ Collapse all the collapseable things.
       ready: ->
 
 ###attached
-On attach, set up a global click handler, this will make clicking 'out' of the
-preview collapse all the things, working together with the `trap` handler which
-makes it so you can actually click things to expand them.
 
       attached: ->
-        document.addEventListener 'click', => @collapse()
 
       domReady: ->
 

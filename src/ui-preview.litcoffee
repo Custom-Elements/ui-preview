@@ -22,7 +22,6 @@ This is not an event handler, it is just a method.
 
       collapse: (callback) ->
         if not @hasAttribute 'expanded'
-          callback?()
           return
         preview = @$.preview
         full = @$.full
@@ -37,7 +36,6 @@ that it fires an event before the expansion, with a callback.
 
       expand: (callback) ->
         if @hasAttribute 'expanded'
-          callback?()
           return
         preview = @$.preview
         full = @$.full
